@@ -250,7 +250,7 @@ class ForwardDeceleration extends TuningOpMode<Double> {
     private boolean stopping;
 
     public ForwardDeceleration(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction, double velocity) {
-        super("Forward Deceleration", "A tuner for finding the deceleration of the robot when moving forward. This will move forward until it reaches " + velocity + " inches per second.", false);
+        super("Forward Deceleration", "A tuner for finding the deceleration of the Robot when moving forward. This will move forward until it reaches " + velocity + " inches per second.", false);
 
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
@@ -344,7 +344,7 @@ class StrafeDeceleration extends TuningOpMode<Double> {
     private boolean stopping;
 
     public StrafeDeceleration(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction, double velocity) {
-        super("Strafe Deceleration", "A tuner for finding the deceleration of the robot when moving laterally. This will drive left until it reaches " + velocity + " inches per second.", false);
+        super("Strafe Deceleration", "A tuner for finding the deceleration of the Robot when moving laterally. This will drive left until it reaches " + velocity + " inches per second.", false);
 
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
@@ -431,7 +431,7 @@ class HeadingBraking extends TuningOpMode<List<Double>> {
     Function<HardwareMap, Drivetrain> drivetrainFunction;
 
     private static double[] POWERS;
-    public static double MAX_BRAKE_TIME = 3; //seconds, the robot shouldn't take longer than this to brake
+    public static double MAX_BRAKE_TIME = 3; //seconds, the Robot shouldn't take longer than this to brake
 
     public static int trials = 12;
     public static double maxPower = 1;
@@ -454,7 +454,7 @@ class HeadingBraking extends TuningOpMode<List<Double>> {
 //    private VoltageSensor voltageSensor;
 
     public HeadingBraking(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction) {
-        super("Heading Braking", "A tuner for finding the Heading Braking Coefficients. The robot will turn back at forth at various speed levels.", false);
+        super("Heading Braking", "A tuner for finding the Heading Braking Coefficients. The Robot will turn back at forth at various speed levels.", false);
 
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
@@ -592,7 +592,7 @@ class HeadingTuner extends TuningOpMode<Double> {
     private double lastTime = 0.0;
 
     public HeadingTuner(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction) {
-        super("Heading Tuner", "A tuner for finding the Heading Tuning Coefficients using system identification. This will spin the robot in place for a couple seconds.", false);
+        super("Heading Tuner", "A tuner for finding the Heading Tuning Coefficients using system identification. This will spin the Robot in place for a couple seconds.", false);
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
     }
@@ -714,7 +714,7 @@ class ForwardBraking extends TuningOpMode<List<Double>> {
 
     public ForwardBraking(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction,
                           double headingLinear, double headingQuadratic, double headingKP, double distance) {
-        super("Forward Braking", "A tuner for finding the Forward Braking Coefficients by driving forward and backward at various speeds. Please ensure that you have plenty of room at least " + distance + " inches ahead of the robot, but also tile space behind and laterally around the robot.", false);
+        super("Forward Braking", "A tuner for finding the Forward Braking Coefficients by driving forward and backward at various speeds. Please ensure that you have plenty of room at least " + distance + " inches ahead of the Robot, but also tile space behind and laterally around the Robot.", false);
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
         this.headingLinear = headingLinear;
@@ -882,7 +882,7 @@ class StrafeBraking extends TuningOpMode<List<Double>> {
 
     public StrafeBraking(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction,
                          double headingLinear, double headingQuadratic, double headingKP, double distance) {
-        super("Strafe Braking", "A tuner for finding the Strafe Braking Coefficients by strafing left and right at various speeds. Please ensure that you have plenty of room at least " + distance + " inches to the left and right of the robot and space in front and behind the robot.", false);
+        super("Strafe Braking", "A tuner for finding the Strafe Braking Coefficients by strafing left and right at various speeds. Please ensure that you have plenty of room at least " + distance + " inches to the left and right of the Robot and space in front and behind the Robot.", false);
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
         this.headingLinear = headingLinear;
@@ -1045,7 +1045,7 @@ class ForwardTranslational extends TuningOpMode<List<Double>> {
     private double lastTime = 0.0;
 
     public ForwardTranslational(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction) {
-        super("Forward Translational", "A tuner for finding the Forward Translational kP coefficients using system identification. This will move around 12-24 inches in front of the robot and then stop.", false);
+        super("Forward Translational", "A tuner for finding the Forward Translational kP coefficients using system identification. This will move around 12-24 inches in front of the Robot and then stop.", false);
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
     }
@@ -1165,7 +1165,7 @@ class StrafeTranslational extends TuningOpMode<List<Double>> {
     private double lastTime = 0.0;
 
     public StrafeTranslational(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction) {
-        super("Strafe Translational", "A tuner for finding the Strafe Translational kP coefficients using system identification. This will move around 12-24 inches to the left and right of the robot and then stop.", false);
+        super("Strafe Translational", "A tuner for finding the Strafe Translational kP coefficients using system identification. This will move around 12-24 inches to the left and right of the Robot and then stop.", false);
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
     }

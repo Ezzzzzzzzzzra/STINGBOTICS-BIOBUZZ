@@ -32,7 +32,7 @@ public class TwoWheelTuner extends Procedure {
                         .withDefault(RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD);
         awaitInputs(setup);
 
-        Inputs resolution = inputs("Encoder Resolution Identification", "Set the exact distance you will push the robot in inches");
+        Inputs resolution = inputs("Encoder Resolution Identification", "Set the exact distance you will push the Robot in inches");
         Inputs.Field<Double> distance = resolution.d("Distance").withDefault(48.0);
         awaitInputs(resolution);
 
@@ -169,7 +169,7 @@ class TwoWheelForwardResolution extends TuningOpMode<Double> {
     TwoWheelForwardResolution(TwoWheelSetup values, double distance) {
         super(
                 "Forward Encoder Resolution Identification",
-                "Push your robot forward " + distance + " inches exactly and then stop the Opmode",
+                "Push your Robot forward " + distance + " inches exactly and then stop the Opmode",
                 true
         );
         this.values = values;
@@ -216,7 +216,7 @@ class TwoWheelStrafeResolution extends TuningOpMode<Double> {
     TwoWheelStrafeResolution(TwoWheelSetup values, double distance) {
         super(
                 "Strafe Encoder Resolution Identification",
-                "Push your robot left " + distance + " inches exactly and then stop the Opmode",
+                "Push your Robot left " + distance + " inches exactly and then stop the Opmode",
                 true
         );
         this.values = values;
@@ -262,7 +262,7 @@ class TwoWheelForwardDirection extends TuningOpMode<Boolean> {
         super(
                 "Forward Direction Identification",
                 "Determines if your forward pod needs to be reversed.\n"
-                        + "Push your robot forward and then stop the Opmode",
+                        + "Push your Robot forward and then stop the Opmode",
                 true
         );
         this.values = values;
@@ -304,7 +304,7 @@ class TwoWheelStrafeDirection extends TuningOpMode<Boolean> {
         super(
                 "Strafe Direction Identification",
                 "Determines if your strafe pod needs to be reversed.\n"
-                        + "Push your robot left and then stop the Opmode",
+                        + "Push your Robot left and then stop the Opmode",
                 true
         );
         this.values = values;
@@ -355,7 +355,7 @@ class TwoWheelOffsets extends TuningOpMode<List<Double>> {
         super(
                 "Two Wheel Offset Identification",
                 "Automatically identifies the offsets for your Two Wheel localizer.\n"
-                        + "Spin your robot in place 180 degrees counterclockwise and then stop the Opmode",
+                        + "Spin your Robot in place 180 degrees counterclockwise and then stop the Opmode",
                 true
         );
         this.values = values;

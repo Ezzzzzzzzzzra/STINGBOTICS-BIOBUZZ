@@ -38,7 +38,7 @@ public class ThreeWheelTuner extends Procedure {
         strafeEncoderName = strafeEncoder.get();
 
         Inputs resolution = inputs("Encoder Resolution Identification",
-                "Set a positive push distance in inches. Keep the robot straight during each push.");
+                "Set a positive push distance in inches. Keep the Robot straight during each push.");
         Inputs.Field<Double> distance = resolution.d("Distance").withDefault(48.0);
         awaitInputs(resolution);
         if (!(distance.get() > 0.0)) {
@@ -180,7 +180,7 @@ class ThreeWheelResolution extends TuningOpMode<List<Double>> {
 
     ThreeWheelResolution(String pod, double distance) {
         super(pod + " Encoder Resolution and Direction",
-                "After Start, push the robot " + (pod.equals("Strafe") ? "left " : "forward ") +
+                "After Start, push the Robot " + (pod.equals("Strafe") ? "left " : "forward ") +
                         distance + " inches exactly without turning. Stop moving, press Stop to save this measurement.", true);
         this.pod = pod;
         this.distance = distance;
@@ -223,7 +223,7 @@ class ThreeWheelOffsets extends TuningOpMode<List<Double>> {
     ThreeWheelOffsets(boolean left, double forward, double strafe,
                       double leftDirection, double rightDirection, double strafeDirection) {
         super((left ? "Left" : "Right") + " Pod Offset Identification",
-                "After Start, rotate exactly 180 degrees counterclockwise about the robot center. " +
+                "After Start, rotate exactly 180 degrees counterclockwise about the Robot center. " +
                         "Keep that center fixed. Stop moving, press Stop to save this measurement.", true);
         this.left = left;
         this.forward = forward;

@@ -39,13 +39,13 @@ public class OctoQuadTuner extends Procedure {
 
         double customPodScalar = 0;
 
-        Inputs inputsHeadingScalar = inputs("Custom Scalar Identification Turns", "Set the number of times you will turn your robot.");
+        Inputs inputsHeadingScalar = inputs("Custom Scalar Identification Turns", "Set the number of times you will turn your Robot.");
         Inputs.Field<Integer> turns = inputsHeadingScalar.i("Turns").withDefault(10);
         awaitInputs(inputsHeadingScalar);
         double headingScalar = runOpMode(new OctoQuadHeadingScalar(octoquadName.get(), turns.get(), xPort.get(), yPort.get()));
 
         if (podType.get() == PodType.CUSTOM) {
-            Inputs inputsCustom = inputs("Custom Scalar Identification Push Distance", "Set the distance you will push your robot forward in inches");
+            Inputs inputsCustom = inputs("Custom Scalar Identification Push Distance", "Set the distance you will push your Robot forward in inches");
             Inputs.Field<Double> distance = inputsCustom.d("Distance").withDefault(48.0);
             awaitInputs(inputsCustom);
             customPodScalar = runOpMode(new OctoQuadCustomPodScalar(distance.get(), octoquadName.get(), xPort.get(), yPort.get()));
@@ -99,7 +99,7 @@ class OctoQuadHeadingScalar extends TuningOpMode<Double> {
     public OctoQuadHeadingScalar(String name, int turns, int xPodPort, int yPodPort) {
         super("Heading Scalar Identification",
                 "Determines the scalar for the custom pods of the OctoQuad localizer. \n"
-                        + "Turn your robot " + turns * 360 + " degrees exactly ("+ turns + " times) exactly and then stop the OpMode.",
+                        + "Turn your Robot " + turns * 360 + " degrees exactly ("+ turns + " times) exactly and then stop the OpMode.",
                 true);
         this.name = name;
         this.turns = turns;
@@ -145,7 +145,7 @@ class OctoQuadCustomPodScalar extends TuningOpMode<Double> {
     public OctoQuadCustomPodScalar(Double distance, String name, int xPodPort, int yPodPort) {
         super("Custom Scalar Identification",
                 "Determines the scalar for the custom pods of the OctoQuad localizer. \n"
-                        + "Push your robot forward " + distance + " inches exactly and then stop the Opmode",
+                        + "Push your Robot forward " + distance + " inches exactly and then stop the Opmode",
                 true);
         this.name = name;
         this.distance = distance;
@@ -196,7 +196,7 @@ class OctoQuadForwardDirection extends TuningOpMode<Boolean> {
                                     int xPodPort, int yPodPort) {
         super("Forward Direction Identification",
                 "Determines if your forward pod needs to be reversed. \n"
-                        + "Push your robot forward and then stop the Opmode",
+                        + "Push your Robot forward and then stop the Opmode",
                 true);
         this.name = name;
         this.podType = podType;
@@ -245,7 +245,7 @@ class OctoQuadStrafeDirection extends TuningOpMode<Boolean> {
                                    int xPodPort, int yPodPort) {
         super("Strafe Direction Identification",
                 "Determines if your strafe pod needs to be reversed. \n"
-                        + "Push your robot to the left and then stop the Opmode",
+                        + "Push your Robot to the left and then stop the Opmode",
                 true);
         this.name = name;
         this.podType = podType;
@@ -297,7 +297,7 @@ class OctoQuadOffsets extends TuningOpMode<List<Double>> {
                            int xPodPort, int yPodPort) {
         super("OctoQuadOffsets Identification",
                 "Automatically identifies the offsets for your OctoQuad localizer. \n"
-                        + "Spin your robot in place 180 degrees counterclockwise and then stop the Opmode",
+                        + "Spin your Robot in place 180 degrees counterclockwise and then stop the Opmode",
                 true);
         this.name = name;
         this.podType = podType;
