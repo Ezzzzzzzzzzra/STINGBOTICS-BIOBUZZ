@@ -7,8 +7,10 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.acmerobotics.dashboard.config.Config;
+@Config
 public class Robot {
     //fields
     public DcMotor frontRight;
@@ -16,6 +18,11 @@ public class Robot {
     public DcMotor backRight;
     public DcMotor backLeft;
 
+    public Servo toiletpaper1;
+
+    public Servo toiletpaper2;
+
+    public Servo cheekyBoy;
     public ColorSensor achintaSensor;
 
     //public Servo angle1;
@@ -79,6 +86,9 @@ public class Robot {
         this.timer = timer;
 
         //Map variables to motors
+        toiletpaper1 = hardwareMap.get(Servo.class, "tp1");
+        toiletpaper2 = hardwareMap.get(Servo.class, "tp2");
+        cheekyBoy = hardwareMap.get(Servo.class, "tp3");
         frontLeft = hardwareMap.get(DcMotor.class, "motor_fl");
         frontRight = hardwareMap.get(DcMotor.class, "motor_fr");
         backLeft = hardwareMap.get(DcMotor.class, "motor_bl");
@@ -100,6 +110,9 @@ public class Robot {
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        toiletpaper1.setDirection(Servo.Direction.REVERSE);
+        toiletpaper2.setDirection(Servo.Direction.FORWARD);
+        cheekyBoy.setDirection(Servo.Direction.FORWARD);
 
 
     }

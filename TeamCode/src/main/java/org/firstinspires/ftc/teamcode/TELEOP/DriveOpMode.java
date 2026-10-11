@@ -8,9 +8,11 @@ import org.firstinspires.ftc.teamcode.HARDWARE.MecanumKinematics;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 // Import custom-made classes/methods
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 //import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
@@ -19,6 +21,7 @@ import org.firstinspires.ftc.teamcode.HARDWARE.MotionProfile1D;
 import org.firstinspires.ftc.teamcode.HARDWARE.Robot;
 
 @TeleOp
+@Config
 public class DriveOpMode extends OpMode{
     // Create variables
     double[] motorPowers;
@@ -60,12 +63,15 @@ public class DriveOpMode extends OpMode{
     // Set starting values for variable
     public void init() {
         robot.init(hardwareMap, timer);
-        // Update telemetry (for feedback)
+
+        telemetry = new MultipleTelemetry(
+                telemetry,
+                FtcDashboard.getInstance().getTelemetry()
+        );
+
         telemetry.addLine("Initialized!");
         telemetry.update();
 
-        // aprilTag.init(hardwareMap, telemetry);
-        //get the location of the Tag on the field
 
     }
     @Override
@@ -75,17 +81,17 @@ public class DriveOpMode extends OpMode{
         previousGamepad2.copy(currentGamepad2);
         currentGamepad2.copy(gamepad2);
         if(shooterState == state.ON){
-            robot.shooter.setPower(.4);
+            robot.shooter.setPower(.3);
         }else if(shooterState == state.REVERSE){
-            robot.shooter.setPower(-.94);
+            robot.shooter.setPower(.3);
         }else{
             robot.shooter.setPower(0);
         }
 
         if(intakeState == state.ON){
-            robot.intake.setPower(.65);
+            robot.intake.setPower(.5);
         }else if(intakeState == state.REVERSE){
-            robot.intake.setPower(-.65);
+            robot.intake.setPower(-.5);
         }else{
             robot.intake.setPower(0);
         }
@@ -95,6 +101,9 @@ public class DriveOpMode extends OpMode{
         blueVal = robot.achintaSensor.blue()/redVal;
         greenVal = robot.achintaSensor.green()/redVal;
 
+        if ((Math.abs(currentGamepad1.left_stick_x) > 0.05 || Math.abs(currentGamepad1.left_stick_y) > 0.05) && !(Math.abs(previousGamepad1.left_stick_x) > 0.05 || Math.abs(previousGamepad1.left_stick_y) > 0.05)) {
+            rampFunction.reset();
+        }
         // Vector2Dim fieldVelocity = new Vector2Dim(robot.odometry.getVelX(DistanceUnit.INCH), robot.odometry.getVelY(DistanceUnit.INCH));
         //Vector2Dim goalVelocity = fieldVelocity.rotateBy((currentSide==side.BLUE ? 1:-1) * (Math.PI - robotToGoalAngle));
         if (blueVal>0.2 && blueVal<0.9 && greenVal > 1.4 && greenVal < 1.6){
