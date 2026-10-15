@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 @TeleOp
 public class Umedications extends OpMode {
     public DcMotorEx shooter;
-    public double highVelocity = 1600;
+    public double   highVelocity = 1600;
     public double lowVelocity = 900;
 
     double currentTargetVelocity = highVelocity;
@@ -38,7 +38,7 @@ public class Umedications extends OpMode {
         telemetry.addLine("init Complete!");
     }
     public void loop(){
-        //set all gamepad commands
+        //get all gamepad commands
         //set target velocity
         //update telemetry
 
@@ -55,23 +55,27 @@ public class Umedications extends OpMode {
         }
         if (gamepad1.bWasPressed()){
             stepIndex = (stepIndex + 1) % stepSizes.length;
+            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
         }
         if (gamepad1.dpadLeftWasPressed()){
             F -= stepSizes[stepIndex];
+            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
         }
         if(gamepad1.dpadRightWasPressed()){
             F += stepSizes[stepIndex];
+            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
         }
         if(gamepad1.dpadUpWasPressed()){
             P += stepSizes[stepIndex];
+            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
 
         }
         if(gamepad1.dpadDownWasPressed()){
             P -= stepSizes[stepIndex];
+            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
         }
-        //set new PIDF coefficients
-        PIDFCoefficients pidfCoefficients = new PIDFCoefficients(P, 0, 0, F);
-        shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+
+
         //set velocity
         shooter.setVelocity(currentTargetVelocity);
 
@@ -80,11 +84,15 @@ public class Umedications extends OpMode {
 
         telemetry.addData("target Velocity: ", currentTargetVelocity);
         telemetry.addData("Current Velocity: ", "%.2f", currentVelocity);
-        telemetry.addData("Error ","&.2f", error);
+        telemetry.addData("Error: ", "%.2f", error);
         telemetry.addLine("-------------------------------");
         telemetry.addData("Tuning P", "%.4f (D-Pad U/D)", P);
         telemetry.addData("Tuning F", "%.4f (D-Pad L/R)", F);
         telemetry.addData("StepSize", "%.4f (B Button)", stepSizes[stepIndex]);
+        telemetry.addData("Raw Ticks", shooter.getCurrentPosition());
+        telemetry.update();
+
+
 
 
     }
