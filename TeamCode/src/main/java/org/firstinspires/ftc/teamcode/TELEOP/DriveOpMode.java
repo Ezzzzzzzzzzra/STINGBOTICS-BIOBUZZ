@@ -89,7 +89,7 @@ public class DriveOpMode extends OpMode{
         }
 
         if(intakeState == state.ON){
-            robot.intake.setPower(.5);
+            robot.intake.setPower(1);
         }else if(intakeState == state.REVERSE){
             robot.intake.setPower(-.5);
         }else{
