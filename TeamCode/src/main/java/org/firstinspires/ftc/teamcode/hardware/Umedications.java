@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.HARDWARE;
+package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -7,13 +7,16 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import org.firstinspires.ftc.teamcode.hardware.Robot;
 
 @TeleOp
 public class Umedications extends OpMode {
-    public DcMotorEx shooter;
+
     public double   highVelocity = 1600;
     public double lowVelocity = 900;
-
+    public DcMotorEx shootLeft;
+    public DcMotorEx shootRight;
+    public DcMotorCombined shooter;
     double currentTargetVelocity = highVelocity;
 
     //feedforward
@@ -29,12 +32,14 @@ public class Umedications extends OpMode {
 
     @Override
     public void init(){
-        shooter = hardwareMap.get(DcMotorEx.class, "shooter");
-        shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        shooter.setDirection(DcMotorSimple.Direction.REVERSE);
+        shootLeft = hardwareMap.get(DcMotorEx.class, "shootLeft");
+        shootRight = hardwareMap.get(DcMotorEx.class, "shootRight");
+        shooter = new DcMotorCombined(shootLeft, shootRight);
+        shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         //I and D are 0 for a flywheel shooter
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(P, 0, 0, F);
-        shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        shootLeft.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        shootRight.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, pidfCoefficients);
         telemetry.addLine("init Complete!");
     }
     public void loop(){
@@ -55,24 +60,24 @@ public class Umedications extends OpMode {
         }
         if (gamepad1.bWasPressed()){
             stepIndex = (stepIndex + 1) % stepSizes.length;
-            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
+            shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
         }
         if (gamepad1.dpadLeftWasPressed()){
             F -= stepSizes[stepIndex];
-            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
+            shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
         }
         if(gamepad1.dpadRightWasPressed()){
             F += stepSizes[stepIndex];
-            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
+            shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
         }
         if(gamepad1.dpadUpWasPressed()){
             P += stepSizes[stepIndex];
-            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
+            shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
 
         }
         if(gamepad1.dpadDownWasPressed()){
             P -= stepSizes[stepIndex];
-            shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
+            shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(P, 0, 0, F));
         }
 
 
@@ -89,7 +94,8 @@ public class Umedications extends OpMode {
         telemetry.addData("Tuning P", "%.4f (D-Pad U/D)", P);
         telemetry.addData("Tuning F", "%.4f (D-Pad L/R)", F);
         telemetry.addData("StepSize", "%.4f (B Button)", stepSizes[stepIndex]);
-        telemetry.addData("Raw Ticks", shooter.getCurrentPosition());
+        telemetry.addData("Raw Ticks Left", shootLeft.getCurrentPosition());
+        telemetry.addData("Raw Ticks Right", shootLeft.getCurrentPosition());
         telemetry.update();
 
 

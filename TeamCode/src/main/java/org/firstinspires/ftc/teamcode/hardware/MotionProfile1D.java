@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.HARDWARE;
+package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 //export machine

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.HARDWARE;
+package org.firstinspires.ftc.teamcode.hardware;
 
 public class MathFunctions {
     //turns a boolean into an int

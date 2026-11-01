@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import org.firstinspires.ftc.teamcode.HARDWARE.Robot;
+import org.firstinspires.ftc.teamcode.hardware.Robot;
 
 @TeleOp
 @Config
@@ -18,13 +18,14 @@ public class ServoAdjustments extends OpMode{
     Gamepad currentGamepad1 = new Gamepad();
     Gamepad previousGamepad2 = new Gamepad();
     Gamepad currentGamepad2 = new Gamepad();
-    double screwdoodoo;
+    public static double servoPos = 0.4;
     @Override
+
     // Set starting values for variable
     public void init() {
 
         robot.init(hardwareMap, timer);
-        screwdoodoo = 0;
+
         telemetry = new MultipleTelemetry(
                 telemetry,
                 FtcDashboard.getInstance().getTelemetry()
@@ -42,30 +43,15 @@ public class ServoAdjustments extends OpMode{
         previousGamepad2.copy(currentGamepad2);
         currentGamepad2.copy(gamepad2);
 
-        robot.cheekyBoy.setPosition(screwdoodoo);
+        robot.hood.setPosition(servoPos);
     // telemetryA.addData("x-encoder", robot.odometry.getEncoderX());
         // telemetryA.addData("y-encoder", robot.odometry.getEncoderY());
-        telemetry.addData("side servo1", robot.toiletpaper1.getPosition());
-        telemetry.addData("side servo2", robot.toiletpaper2.getPosition());
-        telemetry.addData("pinion", robot.cheekyBoy.getPosition());
-        robot.toiletpaper1.setPosition(screwdoodoo);
-        robot.toiletpaper2.setPosition(screwdoodoo);
+        telemetry.addData("side servo1", robot.leftHood.getPosition());
+        telemetry.addData("side servo2", robot.rightHood.getPosition());
+        telemetry.addData("pinion", robot.pinion.getPosition());
 
-        if (currentGamepad1.b && !previousGamepad1.b) {
-           robot.toiletpaper1.setPosition(robot.toiletpaper1.getPosition()+0.2);
-        }
-        if (currentGamepad1.y && !previousGamepad1.y){
-            robot.toiletpaper1.setPosition(robot.toiletpaper1.getPosition()-0.2);
-        }
-
-        if (currentGamepad1.left_bumper && !previousGamepad1.left_bumper) {
-            robot.toiletpaper2.setPosition(robot.toiletpaper2.getPosition()+0.2);
-        }
-        if (currentGamepad1.right_bumper && !previousGamepad1.right_bumper){
-            robot.toiletpaper2.setPosition(robot.toiletpaper2.getPosition()-0.2);
-        }
-
-
+        telemetry.addData("left", robot.leftHood.getPosition());
+        telemetry.addData("right", robot.rightHood.getPosition());
         //These things MUST be at the end of each loop. DO NOT MOVE
         telemetry.update();
 

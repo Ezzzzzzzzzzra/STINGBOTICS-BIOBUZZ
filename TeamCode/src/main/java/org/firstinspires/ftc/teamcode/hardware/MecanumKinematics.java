@@ -1,6 +1,4 @@
-package org.firstinspires.ftc.teamcode.HARDWARE;
-
-import org.firstinspires.ftc.teamcode.HARDWARE.MathFunctions;
+package org.firstinspires.ftc.teamcode.hardware;
 
 public class MecanumKinematics {
     // Converts radians to power

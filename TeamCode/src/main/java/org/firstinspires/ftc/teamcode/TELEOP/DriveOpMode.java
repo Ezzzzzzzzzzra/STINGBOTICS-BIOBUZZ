@@ -1,10 +1,9 @@
 // Import FTC package
 package org.firstinspires.ftc.teamcode.TELEOP;
 // Import FTC classes
-import static org.firstinspires.ftc.teamcode.HARDWARE.MathFunctions.toInt;
+import static org.firstinspires.ftc.teamcode.hardware.MathFunctions.toInt;
 
-import org.firstinspires.ftc.teamcode.HARDWARE.MathFunctions;
-import org.firstinspires.ftc.teamcode.HARDWARE.MecanumKinematics;
+import org.firstinspires.ftc.teamcode.hardware.MecanumKinematics;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -17,8 +16,8 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 //import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 //import org.firstinspires.ftc.teamcode.hardware.AprilTag;
-import org.firstinspires.ftc.teamcode.HARDWARE.MotionProfile1D;
-import org.firstinspires.ftc.teamcode.HARDWARE.Robot;
+import org.firstinspires.ftc.teamcode.hardware.MotionProfile1D;
+import org.firstinspires.ftc.teamcode.hardware.Robot;
 
 @TeleOp
 @Config
@@ -81,9 +80,9 @@ public class DriveOpMode extends OpMode{
         previousGamepad2.copy(currentGamepad2);
         currentGamepad2.copy(gamepad2);
         if(shooterState == state.ON){
-            robot.shooter.setPower(.3);
+            robot.shooter.setPower(-1);
         }else if(shooterState == state.REVERSE){
-            robot.shooter.setPower(.3);
+            robot.shooter.setPower(1);
         }else{
             robot.shooter.setPower(0);
         }

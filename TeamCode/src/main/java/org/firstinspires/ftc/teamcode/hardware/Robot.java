@@ -1,10 +1,12 @@
-package org.firstinspires.ftc.teamcode.HARDWARE;
+package org.firstinspires.ftc.teamcode.hardware;
 
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import org.firstinspires.ftc.teamcode.hardware.DcMotorCombined;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -18,17 +20,19 @@ public class Robot {
     public DcMotor backRight;
     public DcMotor backLeft;
 
-    public Servo toiletpaper1;
+    public Servo leftHood;
 
-    public Servo toiletpaper2;
+    public Servo rightHood;
 
-    public Servo cheekyBoy;
+    public Servo pinion;
     public ColorSensor achintaSensor;
-
+    public DcMotorEx shootLeft;
+    public DcMotorEx shootRight;
+    public DcMotorCombined shooter;
+    public ServoCombined hood;
     //public Servo angle1;
     //public Servo angle2;
 
-    public DcMotor shooter;
     public DcMotor intake;
 
     public static final double TURRET_RADIUS = 6.49;
@@ -86,9 +90,10 @@ public class Robot {
         this.timer = timer;
 
         //Map variables to motors
-        toiletpaper1 = hardwareMap.get(Servo.class, "tp1");
-        toiletpaper2 = hardwareMap.get(Servo.class, "tp2");
-        cheekyBoy = hardwareMap.get(Servo.class, "tp3");
+        leftHood = hardwareMap.get(Servo.class, "leftHood");
+        rightHood = hardwareMap.get(Servo.class, "rightHood");
+        hood = new ServoCombined(leftHood, rightHood);
+        pinion = hardwareMap.get(Servo.class, "pinion");
         frontLeft = hardwareMap.get(DcMotor.class, "motor_fl");
         frontRight = hardwareMap.get(DcMotor.class, "motor_fr");
         backLeft = hardwareMap.get(DcMotor.class, "motor_bl");
@@ -96,7 +101,9 @@ public class Robot {
         achintaSensor = hardwareMap.get(ColorSensor.class, "achintaSensor");
         //angle1 = hardwareMap.get(Servo.class, "intakeangle1");
         //angle2 = hardwareMap.get(Servo.class, "intakeangle2");
-        shooter = hardwareMap.get(DcMotor.class, "shooter");
+        shootLeft = hardwareMap.get(DcMotorEx.class, "shootLeft");
+        shootRight = hardwareMap.get(DcMotorEx.class, "shootRight");
+        shooter = new DcMotorCombined(shootLeft, shootRight);
         intake = hardwareMap.get(DcMotor.class, "intake");
         driveMotors = new DcMotor[]{frontLeft, frontRight, backLeft, backRight};
 
@@ -104,15 +111,18 @@ public class Robot {
             i.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             i.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
-
+        shootLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        shootRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         //set motor directions
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
-        toiletpaper1.setDirection(Servo.Direction.REVERSE);
-        toiletpaper2.setDirection(Servo.Direction.FORWARD);
-        cheekyBoy.setDirection(Servo.Direction.FORWARD);
+        leftHood.setDirection(Servo.Direction.REVERSE);
+        rightHood.setDirection(Servo.Direction.FORWARD);
+        pinion.setDirection(Servo.Direction.FORWARD);
+        shootLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        shootRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
     }
