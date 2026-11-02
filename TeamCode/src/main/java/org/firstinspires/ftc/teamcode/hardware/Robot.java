@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import org.firstinspires.ftc.teamcode.hardware.DcMotorCombined;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -28,7 +27,7 @@ public class Robot {
     public ColorSensor achintaSensor;
     public DcMotorEx shootLeft;
     public DcMotorEx shootRight;
-    public DcMotorCombined shooter;
+    public Shooter shooter;
     public ServoCombined hood;
     //public Servo angle1;
     //public Servo angle2;
@@ -103,7 +102,6 @@ public class Robot {
         //angle2 = hardwareMap.get(Servo.class, "intakeangle2");
         shootLeft = hardwareMap.get(DcMotorEx.class, "shootLeft");
         shootRight = hardwareMap.get(DcMotorEx.class, "shootRight");
-        shooter = new DcMotorCombined(shootLeft, shootRight);
         intake = hardwareMap.get(DcMotor.class, "intake");
         driveMotors = new DcMotor[]{frontLeft, frontRight, backLeft, backRight};
 
@@ -111,8 +109,8 @@ public class Robot {
             i.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             i.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
-        shootLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        shootRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        shootLeft.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        shootRight.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         //set motor directions
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -121,8 +119,8 @@ public class Robot {
         leftHood.setDirection(Servo.Direction.REVERSE);
         rightHood.setDirection(Servo.Direction.FORWARD);
         pinion.setDirection(Servo.Direction.FORWARD);
-        shootLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-        shootRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        shootLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        shootRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
     }
