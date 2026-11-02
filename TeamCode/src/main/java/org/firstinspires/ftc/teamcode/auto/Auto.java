@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.AUTO;
+package org.firstinspires.ftc.teamcode.auto;
 
 import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;

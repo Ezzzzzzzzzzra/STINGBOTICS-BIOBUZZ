@@ -1,5 +1,5 @@
 // Import FTC package
-package org.firstinspires.ftc.teamcode.TELEOP;
+package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.acmerobotics.dashboard.config.Config;

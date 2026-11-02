@@ -94,10 +94,10 @@ public class Robot {
         rightHood = hardwareMap.get(Servo.class, "rightHood");
         hood = new ServoCombined(leftHood, rightHood);
         pinion = hardwareMap.get(Servo.class, "pinion");
-        frontLeft = hardwareMap.get(DcMotor.class, "motor_fl");
-        frontRight = hardwareMap.get(DcMotor.class, "motor_fr");
-        backLeft = hardwareMap.get(DcMotor.class, "motor_bl");
-        backRight = hardwareMap.get(DcMotor.class, "motor_br");
+        frontLeft = hardwareMap.get(DcMotor.class, "fl");
+        frontRight = hardwareMap.get(DcMotor.class, "fr");
+        backLeft = hardwareMap.get(DcMotor.class, "bl");
+        backRight = hardwareMap.get(DcMotor.class, "br");
         achintaSensor = hardwareMap.get(ColorSensor.class, "achintaSensor");
         //angle1 = hardwareMap.get(Servo.class, "intakeangle1");
         //angle2 = hardwareMap.get(Servo.class, "intakeangle2");

@@ -1,5 +1,5 @@
 // Import FTC package
-package org.firstinspires.ftc.teamcode.TELEOP;
+package org.firstinspires.ftc.teamcode.teleop;
 // Import FTC classes
 import static org.firstinspires.ftc.teamcode.hardware.MathFunctions.toInt;
 
