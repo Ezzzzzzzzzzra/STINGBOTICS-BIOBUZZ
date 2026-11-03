@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+@TeleOp
 public class ksTune extends OpMode {
     Shooter shooter = new Shooter();
 
@@ -16,7 +18,7 @@ public class ksTune extends OpMode {
     }
     @Override
     public void loop(){
-        if(gamepad2.dpadRightWasPressed() && incrementIdx < 4){
+        if(gamepad1.dpadRightWasPressed() && incrementIdx < 4){
             incrementIdx++;
         }else if(gamepad1.dpadLeftWasPressed() && incrementIdx > 0){
             incrementIdx--;
@@ -24,7 +26,7 @@ public class ksTune extends OpMode {
         double currentStep = increments[incrementIdx];
 
         if(gamepad1.dpadUpWasPressed()) {kS += currentStep; }
-        if(gamepad1.dpadDownWasPressed()) {kS += currentStep; }
+        if(gamepad1.dpadDownWasPressed()) {kS -= currentStep; }
 
         shooter.setPower(kS);
 

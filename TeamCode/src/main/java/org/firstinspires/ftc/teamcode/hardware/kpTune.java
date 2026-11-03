@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+@TeleOp
 public class kpTune extends OpMode {
     Shooter shooter = new Shooter();
     public static double kV = 0.01;

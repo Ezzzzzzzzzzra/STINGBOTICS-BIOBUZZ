@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+@TeleOp
 public class kvTune extends OpMode {
     Shooter shooter = new Shooter();
-    public static double kV = 0.01;
+    public static double kV = 0.001;
     public double kS = 0; //SET WITH TUNED VALUE
 
     public double goalRPM = 1500; //SHOULD BE GREATEST EXPECTED RPM
@@ -18,7 +20,7 @@ public class kvTune extends OpMode {
     }
     @Override
     public void loop(){
-        if(gamepad2.dpadRightWasPressed() && incrementIdx < 4){
+        if(gamepad1.dpadRightWasPressed() && incrementIdx < 4){
             incrementIdx++;
         }else if(gamepad1.dpadLeftWasPressed() && incrementIdx > 0){
             incrementIdx--;
@@ -26,7 +28,7 @@ public class kvTune extends OpMode {
         double currentStep = increments[incrementIdx];
 
         if(gamepad1.dpadUpWasPressed()) {kV += currentStep; }
-        if(gamepad1.dpadDownWasPressed()) {kV += currentStep; }
+        if(gamepad1.dpadDownWasPressed()) {kV -= currentStep; }
 
         double power = (kV * goalRPM) + kS;
         shooter.setPower(power);

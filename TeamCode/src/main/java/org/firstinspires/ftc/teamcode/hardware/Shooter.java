@@ -15,14 +15,14 @@ public class Shooter{
     private double encoderPPR = 28;
     private double gearRatio = 1;
 
-    public double kS = 0, kV = 0, kP = 0; //SET WITH TUNED VALUES
+    public double kS = 0.065249, kV = 0, kP = 0; //SET WITH TUNED VALUES
 
     public void init(HardwareMap hwMap) {
         m1 = hwMap.get(DcMotorEx.class, "shootLeft");
         m2 = hwMap.get(DcMotorEx.class, "shootRight");
         m1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         m2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        m1.setDirection(DcMotorSimple.Direction.REVERSE);
+        m2.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
