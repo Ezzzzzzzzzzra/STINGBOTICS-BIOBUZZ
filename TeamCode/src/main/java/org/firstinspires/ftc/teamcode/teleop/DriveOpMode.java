@@ -5,6 +5,9 @@ import static org.firstinspires.ftc.teamcode.hardware.MathFunctions.toInt;
 
 import org.firstinspires.ftc.teamcode.hardware.MecanumKinematics;
 
+import com.pedropathing.drivetrain.Drivetrain;
+import com.pedropathing.follower.Follower;
+import com.pedropathing.follower.ManualDrive;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.acmerobotics.dashboard.config.Config;
@@ -18,6 +21,11 @@ import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 //import org.firstinspires.ftc.teamcode.hardware.AprilTag;
 import org.firstinspires.ftc.teamcode.hardware.MotionProfile1D;
 import org.firstinspires.ftc.teamcode.hardware.Robot;
+import org.firstinspires.ftc.teamcode.hardware.Shooter;
+import org.firstinspires.ftc.teamcode.pedro.Constants;
+import org.firstinspires.ftc.teamcode.pedro.procedures.Tests;
+
+import java.util.function.Function;
 
 @TeleOp
 @Config
@@ -26,10 +34,14 @@ public class DriveOpMode extends OpMode{
     double[] motorPowers;
     Robot robot = new Robot();
 
+    Shooter shooter = new Shooter();
+
+    private Follower follower;
+
     ElapsedTime timer = new ElapsedTime();
     Gamepad previousGamepad1 = new Gamepad();
     Gamepad currentGamepad1 = new Gamepad();
-
+    Drivetrain drivetrain;
     Gamepad previousGamepad2 = new Gamepad();
     Gamepad currentGamepad2 = new Gamepad();
 
@@ -59,9 +71,12 @@ public class DriveOpMode extends OpMode{
     public double position = 0;
     VectorF targetAprilTagPos;
     @Override
-    // Set starting values for variable
     public void init() {
-        robot.init(hardwareMap, timer);
+        robot.init(hardwareMap, timer);;
+        shooter.init(hardwareMap);
+
+
+        follower = Constants.create(hardwareMap);
 
         telemetry = new MultipleTelemetry(
                 telemetry,
@@ -79,12 +94,22 @@ public class DriveOpMode extends OpMode{
         currentGamepad1.copy(gamepad1);
         previousGamepad2.copy(currentGamepad2);
         currentGamepad2.copy(gamepad2);
+
+        //driving controls
+        ManualDrive.driveOrHold(
+                follower,
+                -gamepad1.left_stick_y,
+                gamepad1.left_stick_x,
+                gamepad1.right_stick_x
+        );
+        follower.update();
+
         if(shooterState == state.ON){
-            robot.shooter.setPower(-1);
+            shooter.setPower(-.8);
         }else if(shooterState == state.REVERSE){
-            robot.shooter.setPower(1);
+             shooter.setPower(.8);
         }else{
-            robot.shooter.setPower(0);
+            shooter.setPower(0);
         }
 
         if(intakeState == state.ON){
@@ -138,22 +163,11 @@ public class DriveOpMode extends OpMode{
                 intakeState = state.OFF;
             }
         }
-        // Gets power levels for each motor, using gamepad inputs as directions
-        // The third item in the array dictates which trigger is being pressed (=1 if left, =-1 if right, =0 if none or both).
-        motorPowers = MecanumKinematics.getPowerFromDirection(new double[]{                        -gamepad1.left_stick_x * Math.abs(gamepad1.left_stick_x),
-                        -gamepad1.left_stick_y * Math.abs(gamepad1.left_stick_y),
-                        -(toInt(gamepad1.right_bumper) - toInt(gamepad1.left_bumper))
-                },
-                rampFunction.getTargetSpeed()
-        );
 
         telemetry.addData("gamepadx", currentGamepad1.left_stick_x);
         telemetry.addData("gamepady", currentGamepad1.left_stick_y);
         // Sets power levels
-        // Works because each index corresponds with the same wheel in both arrays
-        for (int i = 0; i < motorPowers.length; i++) {
-            robot.driveMotors[i].setPower(motorPowers[i]);
-        }
+        // Works because each index corresponds with the same wheel in both array
 
         telemetry.addData("frontLeft", robot.frontLeft.getPower());
         telemetry.addData("backLeft", robot.backLeft.getPower());

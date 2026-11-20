@@ -13,6 +13,7 @@ import org.firstinspires.ftc.teamcode.pedro.procedures.Tests;
 
 public class Tuning {
     // Tuners go here
+
     @Tuner
 
     public static Procedure foresightTuner() {

@@ -18,10 +18,10 @@ public class ServoAdjustments extends OpMode{
     Gamepad currentGamepad1 = new Gamepad();
     Gamepad previousGamepad2 = new Gamepad();
     Gamepad currentGamepad2 = new Gamepad();
-    public static double servoPos = 0.4;
-    @Override
+    public static double servoPos = 0;
+    //0.37max height
 
-    // Set starting values for variable
+    @Override
     public void init() {
 
         robot.init(hardwareMap, timer);

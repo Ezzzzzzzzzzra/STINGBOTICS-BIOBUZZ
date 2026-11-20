@@ -310,7 +310,7 @@ class TestsLocalization extends TuningOpMode<Boolean> {
     }
 }
 
-class TestsOdometry extends TuningOpMode<Boolean> {
+class   TestsOdometry extends TuningOpMode<Boolean> {
     Function<HardwareMap, Drivetrain> drivetrainFunction;
     Function<HardwareMap, Localizer> localizerFunction;
 
