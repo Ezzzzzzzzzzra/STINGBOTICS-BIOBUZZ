@@ -24,6 +24,10 @@ public class Robot {
     public Servo rightHood;
 
     public Servo pinion;
+
+    public Servo achintaPaul;
+
+    public Servo rampAngle;
     public ColorSensor achintaSensor;
     public DcMotorEx shootLeft;
     public DcMotorEx shootRight;
@@ -92,17 +96,24 @@ public class Robot {
         leftHood = hardwareMap.get(Servo.class, "leftHood");
         rightHood = hardwareMap.get(Servo.class, "rightHood");
         hood = new ServoCombined(leftHood, rightHood);
+
+        achintaPaul = hardwareMap.get(Servo.class, "camera");
+
+        intake = hardwareMap.get(DcMotor.class, "intake");
+        rampAngle = hardwareMap.get(Servo.class, "ramp");
+
         pinion = hardwareMap.get(Servo.class, "pinion");
+
         frontLeft = hardwareMap.get(DcMotor.class, "motor_fl");
         frontRight = hardwareMap.get(DcMotor.class, "motor_fr");
         backLeft = hardwareMap.get(DcMotor.class, "motor_bl");
         backRight = hardwareMap.get(DcMotor.class, "motor_br");
+
         achintaSensor = hardwareMap.get(ColorSensor.class, "achintaSensor");
-        //angle1 = hardwareMap.get(Servo.class, "intakeangle1");
-        //angle2 = hardwareMap.get(Servo.class, "intakeangle2");
+
         shootLeft = hardwareMap.get(DcMotorEx.class, "shootLeft");
         shootRight = hardwareMap.get(DcMotorEx.class, "shootRight");
-        intake = hardwareMap.get(DcMotor.class, "intake");
+
         driveMotors = new DcMotor[]{frontLeft, frontRight, backLeft, backRight};
 
         for (DcMotor i : driveMotors) {

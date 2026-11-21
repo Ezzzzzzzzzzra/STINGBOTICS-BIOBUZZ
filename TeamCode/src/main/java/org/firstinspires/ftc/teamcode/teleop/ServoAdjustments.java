@@ -18,7 +18,10 @@ public class ServoAdjustments extends OpMode{
     Gamepad currentGamepad1 = new Gamepad();
     Gamepad previousGamepad2 = new Gamepad();
     Gamepad currentGamepad2 = new Gamepad();
-    public static double servoPos = 0;
+    public static double hoodPos = 0;
+    public static double cameraPos = 0.5;
+
+    public static double rampPos = 0.5;
     //0.37max height
 
     @Override
@@ -43,15 +46,21 @@ public class ServoAdjustments extends OpMode{
         previousGamepad2.copy(currentGamepad2);
         currentGamepad2.copy(gamepad2);
 
-        robot.hood.setPosition(servoPos);
+        robot.hood.setPosition(hoodPos);
+        robot.achintaPaul.setPosition(cameraPos);
+        robot.rampAngle.setPosition(rampPos);
     // telemetryA.addData("x-encoder", robot.odometry.getEncoderX());
         // telemetryA.addData("y-encoder", robot.odometry.getEncoderY());
-        telemetry.addData("side servo1", robot.leftHood.getPosition());
-        telemetry.addData("side servo2", robot.rightHood.getPosition());
-        telemetry.addData("pinion", robot.pinion.getPosition());
 
-        telemetry.addData("left", robot.leftHood.getPosition());
-        telemetry.addData("right", robot.rightHood.getPosition());
+
+        telemetry.addData("pinion", robot.pinion.getPosition());
+        telemetry.addLine("-------------------------------");
+        telemetry.addData("left hood", robot.leftHood.getPosition());
+        telemetry.addData("right hood", robot.rightHood.getPosition());
+        telemetry.addLine("-------------------------------");
+        telemetry.addData("Ramp Position: ", robot.rampAngle.getPosition());
+        telemetry.addLine("-----------------------------");
+        telemetry.addData("Camera Position", robot.achintaPaul.getPosition());
         //These things MUST be at the end of each loop. DO NOT MOVE
         telemetry.update();
 
