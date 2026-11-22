@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.hardware;
 
 
 import com.bylazar.configurables.annotations.Configurable;
-import com.bylazar.configurables.annotations.Configurable;
 import com.bylazar.telemetry.JoinedTelemetry;
 import com.bylazar.telemetry.PanelsTelemetry;
 
