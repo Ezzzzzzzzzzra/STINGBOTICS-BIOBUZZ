@@ -47,7 +47,7 @@ public class ServoAdjustments extends OpMode{
         currentGamepad2.copy(gamepad2);
 
         robot.hood.setPosition(hoodPos);
-        robot.achintaPaul.setPosition(cameraPos);
+        robot.cameraTilt.setPosition(cameraPos);
         robot.rampAngle.setPosition(rampPos);
     // telemetryA.addData("x-encoder", robot.odometry.getEncoderX());
         // telemetryA.addData("y-encoder", robot.odometry.getEncoderY());
@@ -60,7 +60,7 @@ public class ServoAdjustments extends OpMode{
         telemetry.addLine("-------------------------------");
         telemetry.addData("Ramp Position: ", robot.rampAngle.getPosition());
         telemetry.addLine("-----------------------------");
-        telemetry.addData("Camera Position", robot.achintaPaul.getPosition());
+        telemetry.addData("Camera Position", robot.cameraTilt.getPosition());
         //These things MUST be at the end of each loop. DO NOT MOVE
         telemetry.update();
 

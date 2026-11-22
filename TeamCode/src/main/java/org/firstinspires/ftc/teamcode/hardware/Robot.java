@@ -11,6 +11,9 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.acmerobotics.dashboard.config.Config;
+
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+
 @Config
 public class Robot {
     //fields
@@ -25,7 +28,7 @@ public class Robot {
 
     public Servo pinion;
 
-    public Servo achintaPaul;
+    public Servo cameraTilt;
 
     public Servo rampAngle;
     public ColorSensor achintaSensor;
@@ -43,6 +46,8 @@ public class Robot {
     public enum localizationType {ROADRUNNER, PINPOINT, ROADRUNNERxPINPOINT}
 
     public localizationType type = localizationType.PINPOINT;
+    public WebcamName camera;
+
 
     public DcMotor[] driveMotors;
     ElapsedTime timer;
@@ -97,12 +102,13 @@ public class Robot {
         rightHood = hardwareMap.get(Servo.class, "rightHood");
         hood = new ServoCombined(leftHood, rightHood);
 
-        achintaPaul = hardwareMap.get(Servo.class, "camera");
+        cameraTilt = hardwareMap.get(Servo.class, "cameraTilt");
 
         intake = hardwareMap.get(DcMotor.class, "intake");
-        rampAngle = hardwareMap.get(Servo.class, "ramp");
+        //rampAngle = hardwareMap.get(Servo.class, "ramp");
 
         pinion = hardwareMap.get(Servo.class, "pinion");
+        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
 
         frontLeft = hardwareMap.get(DcMotor.class, "motor_fl");
         frontRight = hardwareMap.get(DcMotor.class, "motor_fr");
