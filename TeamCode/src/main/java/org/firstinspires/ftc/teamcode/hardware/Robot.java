@@ -10,11 +10,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.acmerobotics.dashboard.config.Config;
+
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
-@Config
+
 public class Robot {
     //fields
     public DcMotor frontRight;

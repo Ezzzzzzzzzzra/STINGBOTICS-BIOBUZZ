@@ -2,15 +2,12 @@
 package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.acmerobotics.dashboard.FtcDashboard;
-import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
 @TeleOp
-@Config
+
 public class ServoAdjustments extends OpMode{
     Robot robot = new Robot();
     ElapsedTime timer = new ElapsedTime();
@@ -29,10 +26,7 @@ public class ServoAdjustments extends OpMode{
 
         robot.init(hardwareMap, timer);
 
-        telemetry = new MultipleTelemetry(
-                telemetry,
-                FtcDashboard.getInstance().getTelemetry()
-        );
+
 
         telemetry.addLine("Initialized!");
         telemetry.update();
