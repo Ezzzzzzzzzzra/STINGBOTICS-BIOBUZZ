@@ -15,12 +15,14 @@ public class ShooterEncoderTest extends OpMode {
         telemetry.addLine("left shooter ");
         telemetry.addData("Position", left.getCurrentPosition());
         telemetry.addData("Velocity", left.getVelocity());
+        telemetry.addData("Left port", left.getConnectionInfo());
 
         telemetry.addLine();
 
         telemetry.addLine("shootRight");
         telemetry.addData("Position", right.getCurrentPosition());
         telemetry.addData("Velocity", right.getVelocity());
+        telemetry.addData("Right port", right.getConnectionInfo());
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ShooterEncoderTest extends OpMode {
 
     @Override
     public void loop() {
-        double power = gamepad1.right_trigger * 0.5;
+        double power = gamepad1.right_trigger * 1;
         left.setPower(power);
         right.setPower(power);
 
