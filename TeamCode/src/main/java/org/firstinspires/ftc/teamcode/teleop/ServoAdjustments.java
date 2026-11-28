@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -20,13 +21,14 @@ import com.qualcomm.robotcore.util.Range;
  * so they won't jump somewhere unexpected when you press START.
  */
 @TeleOp(name = "Servo Adjustments")
+@Configurable
 public class ServoAdjustments extends OpMode {
 
     // CHANGE THIS to the servo's name in the robot configuration
-    public static String SERVO_NAME = "leftHood";
+    public static String SERVO_NAME = "pinion";
 
     // OPTIONAL second servo, gets the same position as the first. "" = not used
-    public static String SERVO_NAME_2 = "rightHood";
+    public static String SERVO_NAME_2 = "";
 
     // Set true if the second servo is mounted mirrored and needs to turn the other way
     public static boolean REVERSE_2 = false;

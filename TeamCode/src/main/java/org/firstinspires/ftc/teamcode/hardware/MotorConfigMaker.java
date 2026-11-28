@@ -12,15 +12,13 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 @TeleOp
 @Configurable
 public class MotorConfigMaker extends OpMode {
 
-    public static double MotorPower = 0.5;
-    public static double Aim_angle;
-    public static double turret_pos;
+    public static double MotorVelocity = 0;
+    public static double hood_angle = 0.3;
+    public static double pinion_pos = 0.3;
 
     Shooter shooter = new Shooter();
     Robot robot = new Robot();
@@ -31,7 +29,6 @@ public class MotorConfigMaker extends OpMode {
 
     Gamepad previousGamepad2 = new Gamepad();
     Gamepad currentGamepad2 = new Gamepad();
-    public static boolean shooterOn = true;
 
     public void init() {
         shooter.init(hardwareMap);
@@ -47,20 +44,20 @@ public class MotorConfigMaker extends OpMode {
         previousGamepad2.copy(currentGamepad2);
         currentGamepad2.copy(gamepad2);
 
-        robot.hood.setPosition(Aim_angle);
-        robot.pinion.setPosition(turret_pos);
+        robot.hood.setPosition(hood_angle);
+        robot.pinion.setPosition(pinion_pos);
+        shooter.setVelocity(MotorVelocity);
 
-        if (currentGamepad1.a && !previousGamepad1.a) {
-            shooterOn = !shooterOn;
-        }
 
-        shooter.setPower(shooterOn ? MotorPower : 0);
-
-        telemetry.addData("Shooter Power", shooter.getPower());
-        telemetry.addData("Hood Angle", robot.hood.getPosition());
-        telemetry.addData("Target (MotorPower)", MotorPower);
-        telemetry.addData("shooterOn", shooterOn);
-        telemetry.addData("Aim" , Aim_angle);
+        telemetry.addLine("----------------");
+        telemetry.addData("Current Velocity", shooter.getVelocity());
+        telemetry.addData("Shooter RPM", shooter.getRPM());
+        telemetry.addLine("----------------");
+        telemetry.addData("Hood" , hood_angle);
+        //telemetry.addData("leftHood pos", robot.leftHood.getPosition());
+        telemetry.addData("righthood pos", robot.rightHood.getPosition());
+        telemetry.addData("lefthood pos", robot.leftHood.getPosition());
+        telemetry.addData("pinion position", robot.pinion.getPosition());
         telemetry.update();
 
     }

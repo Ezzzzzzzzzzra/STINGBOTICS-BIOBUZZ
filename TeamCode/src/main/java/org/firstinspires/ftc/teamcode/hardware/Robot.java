@@ -120,6 +120,7 @@ public class Robot {
         shootLeft = hardwareMap.get(DcMotorEx.class, "shootLeft");
         shootRight = hardwareMap.get(DcMotorEx.class, "shootRight");
 
+
         driveMotors = new DcMotor[]{frontLeft, frontRight, backLeft, backRight};
 
         for (DcMotor i : driveMotors) {
